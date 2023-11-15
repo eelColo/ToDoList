@@ -7,7 +7,17 @@ body{
     background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
 }
 nav{
-    height: 30px;
+    background-color: #00d2ff;
+}
+a{
+    font-size: 18px;
+    color: azure;
+    text-decoration: none;
+    margin: 25px;
+    
+}
+a:hover{
+    color: black;
 }
 main{
     width: 90%;
