@@ -16,7 +16,7 @@ public class Task {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="name")
+	@Column(name="id_tarea")
 	private int id;
 	
 	@Column(name = "tiempo")
@@ -25,22 +25,29 @@ public class Task {
 	@Column(name = "tarea")
 	private String tarea;
 	
-	@Column(name = "completado")
+	@Column(name = "completada")
 	private boolean completado;
 
-	@ManyToOne
-	@JoinColumn(name="id_u")
-	User id_u;
+	//@ManyToOne
+	//@JoinColumn(name="id_u")
+	//User id_u;
 	
 	public Task() {}
 
-	public Task(int id, String tiempo, String tarea, boolean completado, User id_u) {
-		super();
+	/*public Task(int id, String tiempo, String tarea, boolean completado, User id_u) {
+		
 		this.id = id;
 		this.tiempo = tiempo;
 		this.tarea = tarea;
 		this.completado = completado;
 		this.id_u = id_u;
+	}*/
+	public Task(int id, String tiempo, String tarea, boolean completado) {
+		
+		this.id = id;
+		this.tiempo = tiempo;
+		this.tarea = tarea;
+		this.completado = completado;
 	}
 
 	public int getId() {
@@ -75,7 +82,7 @@ public class Task {
 		this.completado = completado;
 	}
 
-	public User getId_u() {
+	/*public User getId_u() {
 		return id_u;
 	}
 
@@ -88,7 +95,7 @@ public class Task {
 		return "Task [id=" + id + ", tiempo=" + tiempo + ", tarea=" + tarea + ", completado=" + completado + ", id_u="
 				+ id_u + "]";
 	}
-
+*/
 	
 
 	

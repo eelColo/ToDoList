@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TO DO LIST</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="/static/styles.css" th:href="@{styles.css}">
 
 </head>
 <body>
@@ -17,13 +17,13 @@
 
     <div class="collapse navbar-collapse justify-content-center a" id="navbarSupportedContent">
         <ul class="navbar-nav">
-            <li class="nav-item active mt-3">
+            <li class="nav-item active mt-2 mb-2">
                 <a href="" class="">LINK</a>
             </li>
-            <li class="nav-item active mt-3">
+            <li class="nav-item active mt-2 mb-2">
                 <a href="" class="">LINK</a>
             </li>
-            <li class="nav-item active mt-3">
+            <li class="nav-item active mt-2 mb-2">
                 <a href="" class="">LINK</a>
             </li>
         </ul>
@@ -33,49 +33,95 @@
 
 
 <main class="">
+    <div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModalAgregar">agregar</button></div>
 
+    <div class="modal fade" id="myModalAgregar" tabindex="-1" aria-labelledby="myModalAgregar" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalAgregar">Agregar tarea nueva</h3>
+                </div>
+                <!--Cuerpo donde esta el form-->
+                <div class="modal-body">
+                    <form action="POST">
+                        <div class="mb-3">
+                            <label for="tiempo" class="form-label">Tiempo para completarlo</label>
+                            <input type="text" class="form-control" id="tiempo">          
+                        </div>
     
-    <div class="d-flex flex-wrap text-center">
-        <div>
-        <div class="card m-5">
-            <div class="card-header fw-bold">Tiempo para tarea</div>
-            <div class="card-body ">
-                <p>Tarea a realizar</p>
+                        <div class="mb-3">
+                            <label for="tarea" class="form-label">Tarea</label>
+                            <textarea name="tarea" id="tarea" class="form-control" style="height: 140px;"></textarea>        
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+                <!--Boton de cierre-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>     
+                </div>
+
             </div>
         </div>
-        <div class="btn-group" role="group" aria-label="Basic outline">
-            <button type="button" class="btn  btn-outline-primary">Eliminar</button>
-            <button type="button" class="btn  btn-outline-primary">Editar</button>
-            <button type="button" class="btn  btn-outline-primary">Completar</button>
-        </div>
-        </div>
 
-        <div>
-            <div class="card  m-5">
-                <div class="card-header fw-bold">Tiempo para tarea</div>
+    </div>
+    
+    <div class="d-flex flex-wrap text-center">
+
+        <div th:each="task:${tasks}">
+        <div class="card m-5">
+                <div class="card-header fw-bold" th:text="${task.tiempo}"></div>
                 <div class="card-body ">
-                    <p>Tarea a realizar</p>
+                    <p th:text="${task.tarea}" ></p>
                 </div>
             </div>
             <div class="btn-group" role="group" aria-label="Basic outline">
                 <button type="button" class="btn  btn-outline-primary">Eliminar</button>
-                <button type="button" class="btn  btn-outline-primary">Editar</button>
+
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#myModalEditar">Editar</button>
+
+                <div class="modal fade" id="myModalEditar" tabindex="-1" aria-labelledby="myModalEditar" aria-hidden="true">
+
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="myModalEditar">Editar</h3>
+                            </div>
+                            <!--Cuerpo donde esta el form-->
+                            <div class="modal-body">
+                                <form action="POST">
+                                    <div class="mb-3">
+                                        <label for="tiempo" class="form-label">Tiempo para completarlo</label>
+                                        <input type="text" class="form-control" id="tiempo">          
+                                    </div>
+                
+                                    <div class="mb-3">
+                                        <label for="tarea" class="form-label">Tarea</label>
+                                        <textarea name="tarea" id="tarea" class="form-control" style="height: 140px;"></textarea>        
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </form>
+                            </div>
+                            <!--Boton de cierre-->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>     
+                            </div>
+            
+                        </div>
+                    </div>
+            
+                </div>
+
+
+
+
+
                 <button type="button" class="btn  btn-outline-primary">Completar</button>
             </div>
-            </div>
-            <div>
-                <div class="card  m-5">
-                    <div class="card-header fw-bold">Tiempo para tarea</div>
-                    <div class="card-body ">
-                        <p>Tarea a realizar</p>
-                    </div>
-                </div>
-                <div class="btn-group" role="group" aria-label="Basic outline">
-                    <button type="button" class="btn  btn-outline-primary">Eliminar</button>
-                    <button type="button" class="btn  btn-outline-primary">Editar</button>
-                    <button type="button" class="btn  btn-outline-primary">Completar</button>
-                </div>
-                </div>
+        </div>
+
+        
         
     </div>
 
