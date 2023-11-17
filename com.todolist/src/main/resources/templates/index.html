@@ -44,15 +44,15 @@
                 </div>
                 <!--Cuerpo donde esta el form-->
                 <div class="modal-body">
-                    <form action="POST">
+                    <form method="POST" action="#" th:object="${ntask}" th:action="@{/rest/task}">
                         <div class="mb-3">
                             <label for="tiempo" class="form-label">Tiempo para completarlo</label>
-                            <input type="text" class="form-control" id="tiempo">          
+                            <input type="text" class="form-control" id="tiempo" th:field="*{tiempo}" value="{tiempo}">          
                         </div>
     
                         <div class="mb-3">
                             <label for="tarea" class="form-label">Tarea</label>
-                            <textarea name="tarea" id="tarea" class="form-control" style="height: 140px;"></textarea>        
+                            <textarea name="tarea" id="tarea" class="form-control" style="height: 140px;" th:field="*{tarea}" value="{tarea}"></textarea>        
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
@@ -70,15 +70,21 @@
     <div class="d-flex flex-wrap text-center">
 
         <div th:each="task:${tasks}">
-        <div class="card m-5">
+            <div class="card m-5">
                 <div class="card-header fw-bold" th:text="${task.tiempo}"></div>
                 <div class="card-body ">
                     <p th:text="${task.tarea}" ></p>
                 </div>
             </div>
             <div class="btn-group" role="group" aria-label="Basic outline">
-                <button type="button" class="btn  btn-outline-primary">Eliminar</button>
 
+                <!--Form para borrar atributo-->
+                <form th:attr="action=@{'/rest/task/' + ${task.id}}" method="post">
+                    <input class="d-none" name="id" th:value="${task.id}"/>
+                    <button type="submit" class="btn btn-outline-primary">Eliminar</button>
+                </form>
+                
+            
                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#myModalEditar">Editar</button>
 
                 <div class="modal fade" id="myModalEditar" tabindex="-1" aria-labelledby="myModalEditar" aria-hidden="true">
