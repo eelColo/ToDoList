@@ -28,6 +28,8 @@ public class TemplateController {
 		//atributo para añadir
 		mo.addAttribute("ntask", templateTask);
 		
+		mo.addAttribute("etask", templateTask);
+		
 		//atributo de listado
 		mo.addAttribute("tasks", taskServ.listAllTasks());
 		

@@ -35,7 +35,7 @@ public class MainController {
 		try {
 			res.sendRedirect("/todolist");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
@@ -54,9 +54,15 @@ public class MainController {
 	}
 	
 	//Editar
-	@PutMapping("/task/{id}")
-	public void editTask(@PathVariable(value = "id") Integer idTask,@RequestBody Task task) {
+	@GetMapping("/task/edit/{id}")
+	public void editTask(@PathVariable(value = "id") Integer idTask,@ModelAttribute("etask") Task task, HttpServletResponse res) {
 		taskServ.editTask(idTask, task);
+		try {
+			res.sendRedirect("/todolist");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
 	}
 	
 	//Borrado
